@@ -18,6 +18,7 @@ const Header = ({lang, handleLangChange}) => (
                 <option value="en">English</option>
                 <option value="de">Deutsch</option>
                 <option value="bg">Български</option>
+                <option value="any">Any Language</option>
             </select>
         </div>
     </div>

@@ -2,8 +2,10 @@ import React from "react";
 
 import './footer.styles.scss';
 
-const Footer = () => (
-    <p className="footer">&copy;2020 Copyrigth Rebus Networks LTD.</p>
-);
+const Footer = () => {
+    let currentDate = new Date();
+    let currentYear = currentDate.getFullYear()
+    return (<p className="footer">&copy;{currentYear} Copyright Rebus Networks Ltd</p>);
+};
 
 export default Footer;
