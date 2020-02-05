@@ -1,0 +1,3 @@
+export const GET_ARTICLES = 'GET_ARTICLES';
+export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
+export const IS_LOADING = 'IS_LOADING';
