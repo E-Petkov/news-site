@@ -1,16 +1,13 @@
-import React, {createContext, useReducer, useEffect} from "react";
-import {articlesReducer, articleState} from '../reducers/articles.reducer';
-import {CHANGE_LANGUAGE} from "../reducers/all.types";
+import React, {createContext, useReducer} from "react";
+import {articlesReducer, articlesState} from '../reducers/articles.reducer';
 
 export const ArticlesContext = createContext();
 
 const ArticlesContextProvider = (props) => {
-    const [state, dispatch] = useReducer(articlesReducer, articleState);
-    const handleLangChange = (e) => {
-        dispatch({type: CHANGE_LANGUAGE, payload: e.target.value})
-    };
+    const [state, dispatch] = useReducer(articlesReducer, articlesState);
+
     return (
-        <ArticlesContext.Provider value={[state, dispatch, handleLangChange]}>
+        <ArticlesContext.Provider value={[state, dispatch]}>
             {props.children}
         </ArticlesContext.Provider>
     )

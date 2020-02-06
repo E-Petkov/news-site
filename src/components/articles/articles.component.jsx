@@ -1,16 +1,23 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {useContext} from "react";
 
 import './articles.component.scss';
+import {HANDLE_ARTICLE_CLICK} from "../../reducers/all.types";
+import {ArticlesContext} from "../../contexts/articles.context";
 
 
-const Articles = ({topic, description, date, loading, id, handleArticleClick}) => {
+const Articles = ({topic, description, date, loading, id}) => {
+    const [articlesState, articlesDispatch] = useContext(ArticlesContext);
     if (loading) {
         return <h2>Loading...</h2>;
     }
     return (
         // <Link to={`/?article=${id}`}>
-            <div className="article" onClick={() => handleArticleClick({id})}>
+            <div className="article" onClick={() => articlesDispatch({
+                type: HANDLE_ARTICLE_CLICK, payload: {
+                        hidden: false,
+                        viewedArticleId: id
+                }
+            })} >
                 <div className="topic">{topic}</div>
                 <div className="description">{description}</div>
                 <div className="date">{date.slice(0, 10)}</div>
@@ -18,6 +25,8 @@ const Articles = ({topic, description, date, loading, id, handleArticleClick}) =
         // </Link>
     )
 };
+
+
 
 
 export default Articles;

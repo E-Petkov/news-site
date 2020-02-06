@@ -3,6 +3,7 @@ import React from "react";
 import './header.styles.scss'
 
 import {ReactComponent as Logo} from '../../assets/images/logo.svg';
+import LanguageSelect from "../language-select/languageSelect.component";
 
 
 const Header = ({lang, handleLangChange}) => (
@@ -13,14 +14,7 @@ const Header = ({lang, handleLangChange}) => (
         <div className="banner">
             <span className="site-name">Repairing News Today</span>
         </div>
-        <div>
-            <select value={lang} onChange={handleLangChange} name="languageSelect" id="languageSelect">
-                <option value="en">English</option>
-                <option value="de">Deutsch</option>
-                <option value="bg">Български</option>
-                <option value="any">Any Language</option>
-            </select>
-        </div>
+        <LanguageSelect/>
     </div>
 );
 
