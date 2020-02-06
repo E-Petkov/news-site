@@ -3,17 +3,18 @@ import {HANDLE_ARTICLE_CLICK} from "../../reducers/all.types";
 import {ArticlesContext} from "../../contexts/articles.context";
 
 const FullArticle = ({articles, id}) => {
-    const [articlesState, articlesDispatch] = useContext(ArticlesContext);
+    const [articlesState, dispatch] = useContext(ArticlesContext);
     const selectedArticle = articles.find((article) => article.id === id);
 
     return (
         <div>
             <div>
-                <div className="topic">{selectedArticle.topic}</div>
-                <div className="description">{selectedArticle.description}</div>
+                <div className="topic"><h1>{selectedArticle.topic}</h1></div>
+                <div className="description"><h2>{selectedArticle.description}</h2></div>
                 <div className="date">{selectedArticle.date.slice(0, 10)}</div>
+                <div className="content"><p>{selectedArticle.text}</p></div>
             </div>
-            <button onClick={() => articlesDispatch({
+            <button onClick={() => dispatch({
                 type: HANDLE_ARTICLE_CLICK, payload: {
                 hidden: true,
                 viewedArticleId: null

@@ -28,9 +28,6 @@ const ArticlesList = () => {
     const indexOfLastArticle = articlesState.currentPage * articlesState.articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesState.articlesPerPage;
     const currentArticle = articlesState.articles.slice(indexOfFirstArticle, indexOfLastArticle);
-    // const handleArticleClick = (id) => {
-    //     articlesDispatch({type: HANDLE_ARTICLE_CLICK, payload: {hidden: false, viewedArticleId: id}});
-    // };
 
     return (
         <div className='articles' id='articles'>

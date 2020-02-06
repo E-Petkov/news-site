@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 include('./conn.php');
-$sql = 'SELECT * FROM `news`';
+$sql = 'SELECT * FROM `news` ORDER BY `date` DESC';
 $res = query($sql);
 confirm($res);
 if ($res->num_rows > 0) {

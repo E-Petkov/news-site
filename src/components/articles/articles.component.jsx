@@ -11,7 +11,6 @@ const Articles = ({topic, description, date, loading, id}) => {
         return <h2>Loading...</h2>;
     }
     return (
-        // <Link to={`/?article=${id}`}>
             <div className="article" onClick={() => articlesDispatch({
                 type: HANDLE_ARTICLE_CLICK, payload: {
                         hidden: false,
@@ -22,13 +21,8 @@ const Articles = ({topic, description, date, loading, id}) => {
                 <div className="description">{description}</div>
                 <div className="date">{date.slice(0, 10)}</div>
             </div>
-        // </Link>
     )
 };
-
-
-
-
 export default Articles;
 
 

@@ -7,6 +7,7 @@
   min-height: 70vh;
 }
 .article {
+  height: 52px;
   width: 100%;
   margin: 5px 0;
   display: flex;
@@ -16,6 +17,7 @@
   cursor: pointer;
 
   .topic {
+    height: 52px;
     width: 30%;
     font-size: 16px;
     font-weight: bold;
@@ -25,6 +27,7 @@
   }
 
   .description {
+    height: 52px;
     width: 55%;
     font-size: 16px;
     color: #444;
@@ -34,6 +37,7 @@
   }
 
   .date {
+    height: 52px;
     width: 15%;
     font-size: 16px;
     color: #aaa;
