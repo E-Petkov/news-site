@@ -17,7 +17,7 @@ const LanguageSelect = () => {
         });
         dispatch({type:SET_CURRENT_PAGE, payload:1});
     };
-    console.log(articlesState);
+    // console.log(articlesState);
 
     return (
         <div>

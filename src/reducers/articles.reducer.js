@@ -1,4 +1,12 @@
-import {SET_ARTICLES_PER_PAGE, SET_CURRENT_PAGE, IS_LOADING, CHANGE_LANGUAGE, GET_ARTICLES, HANDLE_ARTICLE_CLICK} from "./all.types";
+import {
+    SET_ARTICLES_PER_PAGE,
+    SET_CURRENT_PAGE,
+    IS_LOADING,
+    CHANGE_LANGUAGE,
+    GET_ARTICLES,
+    HANDLE_ARTICLE_CLICK,
+    ADD_PASS
+} from "./all.types";
 
 export const articlesState = {
     lang: 'en',
@@ -9,7 +17,8 @@ export const articlesState = {
     articleView: {
         hidden: true,
         viewedArticleId: null
-    }
+    },
+    pass: ''
 };
 
 export const articlesReducer = (state, action) => {
@@ -37,7 +46,11 @@ export const articlesReducer = (state, action) => {
             case HANDLE_ARTICLE_CLICK:
                 return {
                     ...state, articleView: action.payload
-                }
+                };
+            case ADD_PASS:
+                return {
+                    ...state, pass: action.payload
+                };
             default:
                 return state
         }
