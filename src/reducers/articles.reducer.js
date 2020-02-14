@@ -5,7 +5,8 @@ import {
     CHANGE_LANGUAGE,
     GET_ARTICLES,
     HANDLE_ARTICLE_CLICK,
-    ADD_PASS
+    ADD_PASS,
+    EDIT_TOPIC
 } from "./all.types";
 
 export const articlesState = {
@@ -50,6 +51,10 @@ export const articlesReducer = (state, action) => {
             case ADD_PASS:
                 return {
                     ...state, pass: action.payload
+                };
+            case EDIT_TOPIC:
+                return {
+                    ...state, topic: action.payload
                 };
             default:
                 return state

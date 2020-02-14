@@ -5,12 +5,7 @@ import ArticlesList from "./components/articles-list/articlesList.component";
 import Header from "./components/header/header.component";
 import Footer from "./components/footer/footer.component";
 import Admin from "./admin/admin";
-// import EditArticle from "./components/edit-article/editArticle";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 const App = (props) => {
     return (
@@ -36,8 +31,6 @@ const App = (props) => {
 
             </Switch>
         </Router>
-// string.slice(n)   var n = str.lastIndexOf("?a=");
-
     )
 };
 

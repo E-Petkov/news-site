@@ -1,0 +1,113 @@
+.article-view {
+  background-color: #ddd;
+  width: 100%;
+  display: block;
+
+  .topic {
+    background-color: #111;
+    color: #eee;
+    padding: 10px 30px;
+    font-size: 28px;
+    text-align: center;
+    width: 1000px;
+  }
+
+  .description {
+    background-color: #444;
+    color: #eee;
+    padding: 10px 30px;
+    font-size: 20px;
+    text-align: right;
+  }
+
+  .content {
+    padding: 10px 30px;
+  }
+}
+
+.refs {
+  display: inline-block;
+  background-color: dodgerblue;
+  font-weight: bolder;
+  text-align: center;
+  padding: 5px 15px;
+}
+
+.date {
+  display: inline-block;
+  color: #eee;
+  background-color: crimson;
+  font-weight: bolder;
+  text-align: center;
+  padding: 5px 15px;
+}
+
+.article-footer {
+  display: flex;
+  justify-content: space-between;
+}
+button {
+  display:inline-block;
+  padding:0.2em 1.45em;
+  margin:0.1em;
+  border:0.15em solid #CCCCCC;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-weight:400;
+  color:#000000;
+  background-color:#CCCCCC;
+  text-align:center;
+}
+button:hover{
+  border-color:#7a7a7a;
+}
+button:active{
+  background-color:#999999;
+}
+.edit-form{
+  width: 1000px;
+  font-size: 16px;
+  text-align: left;
+  color: #333;
+
+
+  .input-topic {
+    padding: 10px 15px;
+    width: 1000px;
+  }
+
+  .input-description {
+    padding: 10px 15px;
+    width: 1000px;
+
+  }
+
+  .input-content {
+    padding: 10px 15px;
+    width: 1000px;
+    //height: auto;
+    resize: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+
+  }
+  .input-refs {
+    padding: 10px 15px;
+    width: 350px;
+    margin: 0 0 10px;
+  }
+
+  .input-date {
+    margin: 0 0 10px;
+
+    padding: 10px 15px;
+    width: 160px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+
+  }
+  .input-id{
+    display: none;
+  }
+
+}

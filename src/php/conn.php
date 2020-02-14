@@ -29,12 +29,17 @@ function confirm($result)
 
 function fetch_array($result)
 {
-    global $conn;
+//    global $conn;
     return mysqli_fetch_array($result);
 }
 
 function fetch_assoc($result)
 {
-    global $conn;
+//    global $conn;
     return mysqli_fetch_assoc($result);
+}
+
+function clean($string)
+{
+    return htmlentities($string);
 }

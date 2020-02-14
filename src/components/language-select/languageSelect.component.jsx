@@ -21,6 +21,7 @@ const LanguageSelect = () => {
 
     return (
         <div>
+            <label htmlFor="select">Choose Language: </label>
             <select value={articlesState.lang} onChange={handleLangChange} name="languageSelect" id="languageSelect">
                 <option value="en">English</option>
                 <option value="de">Deutsch</option>
@@ -30,5 +31,7 @@ const LanguageSelect = () => {
         </div>
     )
 };
+
+
 
 export default LanguageSelect;

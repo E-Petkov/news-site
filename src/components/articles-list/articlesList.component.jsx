@@ -11,7 +11,7 @@ const ArticlesList = (props) => {
     const [articlesState, articlesDispatch] = useContext(ArticlesContext);
     useEffect(() => {
         articlesDispatch({type: IS_LOADING, payload: true});
-        axios.get('http://localhost/news-site/src/php/test.php').then((res) => {
+        axios.get('http://localhost/news-site/src/php/fetch-state.php').then((res) => {
             let filteredRes;
             if (articlesState.lang === 'any') {
                 filteredRes = (res.data)
