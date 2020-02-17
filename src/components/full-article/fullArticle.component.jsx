@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {HANDLE_ARTICLE_CLICK} from "../../reducers/all.types";
+import {HANDLE_ARTICLE_CLICK, TOGGLE_UPDATE} from "../../reducers/all.types";
 import {ArticlesContext} from "../../contexts/articles.context";
 import {Link} from "react-router-dom";
 import './fullArticle.scss';
@@ -11,15 +11,18 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {AuthContext} from "../../Auth";
 
 
-const FullArticle = ({id}) => {
+const FullArticle = (props) => {
     const [articlesState, dispatch] = useContext(ArticlesContext);
-    const selectedArticle = articlesState.articles.find((article) => article.id === id);
+    const selectedArticle = articlesState.articles.find((article) => article.id === props.id);
     const [topic, setTopic] = useState(selectedArticle.topic);
     const [description, setDescription] = useState(selectedArticle.description);
     const [text, setText] = useState(selectedArticle.text);
     const [date, setDate] = useState(selectedArticle.date);
     const [refs, setRefs] = useState(selectedArticle.refs);
-    const { currentUser } = useContext(AuthContext);
+    const [lang, setLang] = useState(selectedArticle.language);
+    const [id, setId] = useState(selectedArticle.id);
+    const {currentUser} = useContext(AuthContext);
+    console.log(selectedArticle);
     const handleTopicEdit = (e) => {
         setTopic(e.target.value)
     };
@@ -35,6 +38,18 @@ const FullArticle = ({id}) => {
     const handleRefsEdit = (e) => {
         setRefs(e.target.value)
     };
+    const handleLangEdit = (e) => {
+        setLang(e.target.value)
+    };
+    const handleNewArticle = () => {
+        setTopic('');
+        setDescription('');
+        setText('');
+        setDate(new Date());
+        setRefs('');
+        setLang('');
+        setId('');
+    };
     const handleSubmit = (event) => {
         event.persist();
         alert('Пращам, ей ся...');
@@ -45,21 +60,38 @@ const FullArticle = ({id}) => {
             "text": text,
             "refs": refs,
             "date": date,
+            "language": lang,
             "id": id
         });
-        axios.post("http://localhost/news-site/src/php/update-db.php", postData).then(response => {
-            // console.log(response.data);
-        }).catch(err => {
-            alert(err);
-            console.log(err);
-        });
-        dispatch({
-            type: HANDLE_ARTICLE_CLICK, payload: {
-                hidden: true,
-                viewedArticleId: null
-            }
-        })
+        if (id === '') {
+            axios.post("http://localhost/news-site/src/php/new-art.php", postData).then(response => {
+            }).catch(err => {
+                alert(err);
+                console.log(err);
+            });
+            dispatch({
+                type: HANDLE_ARTICLE_CLICK, payload: {
+                    hidden: true,
+                    viewedArticleId: null
+                }
+            });
+            dispatch({type: TOGGLE_UPDATE, payload: true});
+        } else {
+            axios.post("http://localhost/news-site/src/php/update-db.php", postData).then(response => {
+            }).catch(err => {
+                alert(err);
+                console.log(err);
+            });
+            dispatch({
+                type: HANDLE_ARTICLE_CLICK, payload: {
+                    hidden: true,
+                    viewedArticleId: null
+                }
+            });
+            dispatch({type: TOGGLE_UPDATE, payload: true});
+        }
     };
+
     const createMarkup = (markup) => {
         return {
             __html: markup
@@ -111,13 +143,22 @@ const FullArticle = ({id}) => {
                                    onChange={handleRefsEdit}/>
                         </div>
                         <div>
+                            <label htmlFor="text">Article Language: </label>
+                            <select value={lang} onChange={handleLangEdit} name="lang" placeholder="hereee">
+                                <option value="en">English</option>
+                                <option value="de">Deutsch</option>
+                                <option value="bg">Български</option>
+                            </select>
+                        </div>
+                        <div>
                             <input type='text' className="input-id" name='id' readOnly={true}
                                    value={id} hidden={true}/>
                         </div>
                         <div>
                             <label htmlFor="date">Date: </label>
                             <input type='date' className="input-date" name='date'
-                                   value={date.slice(0, 10)} onChange={handleDateEdit}/>
+                                   value={(date.length > 1) ? date.slice(0, 10) : new Date()}
+                                   onChange={handleDateEdit}/>
                         </div>
 
                     </div>
@@ -125,7 +166,8 @@ const FullArticle = ({id}) => {
                     <div className="article-footer">
                         <div>
                             <button>DELETE</button>
-                            <button onClick={handleSubmit}>submit</button>
+                            <button onClick={handleNewArticle}>NEW ARTICLE</button>
+                            <button onClick={handleSubmit}>SUBMIT</button>
                         </div>
                         <div>
                             <Link to={`/admin`}>
@@ -144,24 +186,30 @@ const FullArticle = ({id}) => {
                     <div className="article-view">
                         <div className="topic"><p>{selectedArticle.topic}</p></div>
                         <div className="description"><p>{selectedArticle.description}</p></div>
-                        <div className="content" dangerouslySetInnerHTML={createMarkup(selectedArticle.text)}  />
+                        <div className="content" dangerouslySetInnerHTML={createMarkup(selectedArticle.text)}/>
 
                     </div>
                     <div className="article-footer">
                         <div><p><span className="refs">{selectedArticle.refs}</span><span
                             className="date">{selectedArticle.date.slice(0, 10)}</span></p></div>
-                        <button onClick={() => dispatch({
-                            type: HANDLE_ARTICLE_CLICK, payload: {
-                                hidden: true,
-                                viewedArticleId: null
-                            }
-                        })}>Back
-                        </button>
+                        <Link to={`/`}>
+                            <button onClick={() => {
+                                dispatch({
+                                        type: HANDLE_ARTICLE_CLICK, payload: {
+                                            hidden: true,
+                                            viewedArticleId: null
+                                        }
+                                    }
+                                )
+                            }}>Back
+                            </button>
+                        </Link>
                     </div>
                 </div>
             }
         </div>
     )
 };
+
 
 export default FullArticle;

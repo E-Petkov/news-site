@@ -3,6 +3,7 @@ import { withRouter, Redirect } from "react-router";
 import fireApp from "./base.js";
 import { AuthContext } from "./Auth.js";
 import "./login.style.scss";
+import {Link} from "react-router-dom";
 
 const Login = ({ history }) => {
     const handleLogin = useCallback(
@@ -28,7 +29,6 @@ const Login = ({ history }) => {
     }
 
     return (
-        // <div className='content'>
         <div className="login">
             <h1>Log in</h1>
             <form onSubmit={handleLogin}>
@@ -42,8 +42,13 @@ const Login = ({ history }) => {
                 </label>
                 <button type="submit">Log in</button>
             </form>
+            <div>
+                <br/>
+                <Link to={`/`}>
+                    <button>Back</button>
+                </Link>
+            </div>
         </div>
-        // </div>
     );
 };
 

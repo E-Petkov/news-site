@@ -6,3 +6,4 @@ export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const HANDLE_ARTICLE_CLICK = 'HANDLE_ARTICLE_CLICK';
 export const ADD_PASS = 'ADD_PASS';
 export const EDIT_TOPIC = 'EDIT_TOPIC';
+export const TOGGLE_UPDATE = 'TOGGLE_UPDATE';

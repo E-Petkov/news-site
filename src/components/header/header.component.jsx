@@ -1,23 +1,35 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import './header.styles.scss'
 import {Link} from "react-router-dom";
 import {ReactComponent as Logo} from '../../assets/images/logo.svg';
+import {AuthContext} from "../../Auth";
+
 import LanguageSelect from "../language-select/languageSelect.component";
 
 
-const Header = ({lang, handleLangChange}) => (
-    <div className="header">
-        <Link to="/">
-            <div className="logo">
-                <Logo className='logo'/>
+const Header = () => {
+    const {currentUser} = useContext(AuthContext);
+
+    return (
+        <div className="header">
+            {(currentUser) ?
+                <Link to="/admin">
+                    <div className="logo">
+                        <Logo className='logo'/>
+                    </div>
+                </Link> :
+                <Link to="/">
+                    <div className="logo">
+                        <Logo className='logo'/>
+                    </div>
+                </Link>}
+            <div className="banner">
+                <span className="site-name">Repairing News Today</span>
             </div>
-        </Link>
-        <div className="banner">
-            <span className="site-name">Repairing News Today</span>
+            <LanguageSelect/>
         </div>
-        <LanguageSelect/>
-    </div>
-);
+    );
+};
 
 export default Header;

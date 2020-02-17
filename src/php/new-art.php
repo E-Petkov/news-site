@@ -10,7 +10,6 @@ header('Connection: Keep-Alive');
 
 include('./conn.php');
 
-//        var_dump($_POST);
 $topic = clean(
     $_POST['topic']);
 $topic = escape($topic);
@@ -28,10 +27,6 @@ $date = escape($date);
 $lang = clean(
     $_POST['language']);
 $lang = escape($lang);
-$id = clean(
-    $_POST['id']);
-$id = escape($id);
-
-$sql = "UPDATE `news` SET `topic` = '$topic', `description`='$description', `text` = '$text',`refs` = '$refs',`date` = '$date' ,`language` = '$lang' WHERE (`id` = '$id')";
+$sql = "INSERT INTO `news` (`topic`, `description`, `text`, `refs`, `date`, `language`) VALUES ('$topic', '$description', '$text', '$refs', '$date', '$lang')";
 $result = query($sql);
 confirm($result);

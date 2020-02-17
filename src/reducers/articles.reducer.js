@@ -6,7 +6,8 @@ import {
     GET_ARTICLES,
     HANDLE_ARTICLE_CLICK,
     ADD_PASS,
-    EDIT_TOPIC
+    EDIT_TOPIC,
+    TOGGLE_UPDATE
 } from "./all.types";
 
 export const articlesState = {
@@ -19,7 +20,8 @@ export const articlesState = {
         hidden: true,
         viewedArticleId: null
     },
-    pass: ''
+    pass: '',
+    update: false
 };
 
 export const articlesReducer = (state, action) => {
@@ -55,6 +57,10 @@ export const articlesReducer = (state, action) => {
             case EDIT_TOPIC:
                 return {
                     ...state, topic: action.payload
+                };
+            case TOGGLE_UPDATE:
+                return {
+                    ...state, update: action.payload
                 };
             default:
                 return state

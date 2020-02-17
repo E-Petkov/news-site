@@ -5,7 +5,7 @@ import Pagination from "../pagination/pagination.component";
 import FullArticle from '../full-article/fullArticle.component';
 import './artticlesList.styles.scss';
 import axios from "axios";
-import {ADD_PASS, GET_ARTICLES, IS_LOADING} from "../../reducers/all.types";
+import {ADD_PASS, GET_ARTICLES, IS_LOADING, TOGGLE_UPDATE} from "../../reducers/all.types";
 
 const ArticlesList = (props) => {
     const [articlesState, articlesDispatch] = useContext(ArticlesContext);
@@ -23,8 +23,9 @@ const ArticlesList = (props) => {
             articlesDispatch({type: GET_ARTICLES, payload: filteredRes});
             articlesDispatch({type: IS_LOADING, payload: false});
             articlesDispatch({type: ADD_PASS, payload: props.pass});
+            articlesDispatch({type: TOGGLE_UPDATE, payload: false});
         });
-    }, [articlesState.lang]);
+    }, [articlesState.lang, articlesState.update]);
 
     const indexOfLastArticle = articlesState.currentPage * articlesState.articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesState.articlesPerPage;
