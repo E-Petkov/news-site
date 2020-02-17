@@ -1,10 +1,7 @@
 import React, {useContext} from "react";
-
 import './articles.component.scss';
 import {HANDLE_ARTICLE_CLICK} from "../../reducers/all.types";
 import {ArticlesContext} from "../../contexts/articles.context";
-// import {Link} from "react-router-dom";
-
 
 const Articles = ({topic, description, date, loading, id}) => {
     const [articlesState, articlesDispatch] = useContext(ArticlesContext);
@@ -21,18 +18,12 @@ const Articles = ({topic, description, date, loading, id}) => {
         return <h2>Loading...</h2>;
     }
     return (
-        // (articlesState.pass === '123') ?
-            <div className="article" onClick={() => handleOnClick()} >
-                <div className="topic">{topic}</div>
-                <div className="description">{description}</div>
-                <div className="date">{date.slice(0, 10)}</div>
-                {/*{console.log('+++')}*/}
+        <div className="article" onClick={() => handleOnClick()}>
+            <div className="topic">{topic}</div>
+            <div className="description">{description}</div>
+            <div className="date">{date.slice(0, 10)}</div>
 
-                {/*{console.log(articlesState)}*/}
-                {/*{(articlesState.pass === '123') ? <Link to={`/admin/edit/?a=${id}`}><div className="edit">edit</div></Link> : null}*/}
-            </div>
-        // :
-            // <div>jjj</div>
+        </div>
     )
 };
 export default Articles;

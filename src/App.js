@@ -5,34 +5,30 @@ import ArticlesList from "./components/articles-list/articlesList.component";
 import Header from "./components/header/header.component";
 import Footer from "./components/footer/footer.component";
 import Admin from "./admin/admin";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import Login from "./Login";
+import {AuthProvider} from "./Auth";
 
-const App = (props) => {
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+
+const App = () => {
     return (
         <Router>
-            <Switch>
-                <Route path="/admin">
-                    <div className='content'>
-                        <ArticlesContextProvider>
-                            <h1 style={{background: "red", textAlign: 'center'}}>Admin</h1>
-                            <Admin/>
-                        </ArticlesContextProvider>
-                    </div>
-                </Route>
-                <Route exact path="/">
-                    <div className='content'>
-                        <ArticlesContextProvider>
-                            <Header/>
-                            <ArticlesList/>
-                        </ArticlesContextProvider>
+            <div>
+                <div className='content'>
+                    <AuthProvider>
+                    <ArticlesContextProvider>
+                        <Header/>
+                        <Route exact path="/login" component={Login}/>
+                        <PrivateRoute exact path="/admin" component={Admin}/>
+                        <Route exact path="/" component={ArticlesList}/>
                         <Footer/>
-                    </div>
-                </Route>
-
-            </Switch>
+                    </ArticlesContextProvider>
+                    </AuthProvider>
+                </div>
+            </div>
         </Router>
     )
 };
-
 
 export default App;

@@ -8,6 +8,7 @@ import qs from "qs";
 
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {AuthContext} from "../../Auth";
 
 
 const FullArticle = ({id}) => {
@@ -18,6 +19,7 @@ const FullArticle = ({id}) => {
     const [text, setText] = useState(selectedArticle.text);
     const [date, setDate] = useState(selectedArticle.date);
     const [refs, setRefs] = useState(selectedArticle.refs);
+    const { currentUser } = useContext(AuthContext);
     const handleTopicEdit = (e) => {
         setTopic(e.target.value)
     };
@@ -67,7 +69,7 @@ const FullArticle = ({id}) => {
     return (
 
         <div className={''}>
-            {articlesState.pass === '123' ?
+            {(currentUser) ?
                 <div className='edit-form'>
 
 

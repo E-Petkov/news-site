@@ -1,23 +1,23 @@
 import React from 'react';
 import '../App.scss';
 import ArticlesList from "../components/articles-list/articlesList.component";
-import Header from "../components/header/header.component";
-import Footer from "../components/footer/footer.component";
-// import EditArticle from "../components/edit-article/editArticle";
+import fireApp from "../base";
 
 
-const Admin = (props) => {
-// THIS HAS TO BE TURNED INTO SOME KIND OF AUTHENTICATION it is implemented thru the ArticleList component if called from admin component
-    const pass = '123';
+const Admin = () => {
 
     return (
         <div className='content'>
-                <Header/>
-                <ArticlesList pass={pass}/>
-            <Footer/>
+            <h1 style={{background: "red", textAlign: 'center'}}>Admin</h1>
+            <div className="logout">
+            <button onClick={() => fireApp.auth().signOut()}>Sign out</button>
+            </div>
+                <ArticlesList />
         </div>
     )
 };
 
 
-export default Admin;
+export default Admin
+
+// admin@admin.com pass123

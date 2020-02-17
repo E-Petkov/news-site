@@ -29,30 +29,12 @@ const ArticlesList = (props) => {
     const indexOfLastArticle = articlesState.currentPage * articlesState.articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesState.articlesPerPage;
     const currentArticle = articlesState.articles.slice(indexOfFirstArticle, indexOfLastArticle);
-    // const spewAdminHTML = () => currentArticle.map(({id, topic, description, date, pass}, index) => (
-    //         (articlesState.articleView.hidden) ?
-    //
-    //             <Articles
-    //                 key={index}
-    //                 topic={topic}
-    //                 description={description}
-    //                 date={date}
-    //                 id={id}
-    //                 pass={pass}
-    //
-    //             />
-    //
-    //
-    //             : null
-    //     )
-    // );
-    // const spewHTML = () =>
+
     return (
         <div className='articles' id='articles'>
             {!(articlesState.articleView.hidden) ?
                 <FullArticle id={articlesState.articleView.viewedArticleId} articles={articlesState.articles}/> : null}
             {
-                // (props.pass === '123') ? spewAdminHTML() :
                 currentArticle.map(({id, topic, description, date}, index) => (
                     (articlesState.articleView.hidden) ?
                         <Articles
