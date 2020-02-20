@@ -5,7 +5,7 @@ import Pagination from "../pagination/pagination.component";
 import FullArticle from '../full-article/fullArticle.component';
 import './artticlesList.styles.scss';
 import axios from "axios";
-import {ADD_PASS, GET_ARTICLES, IS_LOADING, TOGGLE_UPDATE} from "../../reducers/all.types";
+import {ADD_PASS, COUNT_NEWS, GET_ARTICLES, IS_LOADING, TOGGLE_UPDATE} from "../../reducers/all.types";
 
 const ArticlesList = (props) => {
     const [articlesState, articlesDispatch] = useContext(ArticlesContext);
@@ -24,7 +24,14 @@ const ArticlesList = (props) => {
             articlesDispatch({type: TOGGLE_UPDATE, payload: false});
             // console.log(` ${filteredRes}`);
         });
-    }, [articlesState.lang, articlesState.articlesPerPage]);
+
+        axios.get(`http://localhost/news-site/src/php/count-art.php/?language=${articlesState.lang}`).then((res) => {
+            let news_count = res.data;
+            console.log(res.data);
+            articlesDispatch({type: COUNT_NEWS, payload: news_count});
+        });
+
+    }, [articlesState.lang]);
 
     // const indexOfLastArticle = articlesState.currentPage * articlesState.articlesPerPage;
     // const indexOfFirstArticle = indexOfLastArticle - articlesState.articlesPerPage;

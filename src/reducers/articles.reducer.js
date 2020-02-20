@@ -66,7 +66,7 @@ export const articlesReducer = (state, action) => {
                 };
             case COUNT_NEWS:
                 return {
-                    ...state, update: action.payload
+                    ...state, news_count: action.payload
                 };
             default:
                 return state

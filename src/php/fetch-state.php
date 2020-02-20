@@ -21,16 +21,6 @@ LIMIT 0 ,${perpage}";
 $res = query($sql);
 confirm($res);
 
-$sql_count = "
-SELECT COUNT(*) as count FROM `news` WHERE `language`='{$language}';
-";
-$res_count = query($sql_count);
-confirm($res_count);
-$news_count= fetch_assoc($res_count);
-
-
-
-
 if ($res->num_rows > 0) {
     $json_array = array();
     while ($row = fetch_assoc($res)) {
