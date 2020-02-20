@@ -7,21 +7,23 @@ import {
     HANDLE_ARTICLE_CLICK,
     ADD_PASS,
     EDIT_TOPIC,
-    TOGGLE_UPDATE
+    TOGGLE_UPDATE,
+    COUNT_NEWS
 } from "./all.types";
 
 export const articlesState = {
     lang: 'en',
     loading: false,
     articles: [],
-    articlesPerPage: 2,
+    articlesPerPage: 10,
     currentPage: 1,
     articleView: {
         hidden: true,
         viewedArticleId: null
     },
     pass: '',
-    update: false
+    update: false,
+    news_count: 0
 };
 
 export const articlesReducer = (state, action) => {
@@ -59,6 +61,10 @@ export const articlesReducer = (state, action) => {
                     ...state, topic: action.payload
                 };
             case TOGGLE_UPDATE:
+                return {
+                    ...state, update: action.payload
+                };
+            case COUNT_NEWS:
                 return {
                     ...state, update: action.payload
                 };

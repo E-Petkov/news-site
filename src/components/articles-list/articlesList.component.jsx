@@ -11,21 +11,25 @@ const ArticlesList = (props) => {
     const [articlesState, articlesDispatch] = useContext(ArticlesContext);
     useEffect(() => {
         articlesDispatch({type: IS_LOADING, payload: true});
-        axios.get('http://localhost/news-site/src/php/fetch-state.php').then((res) => {
+        // fetching the data using get
+        axios.get(`http://localhost/news-site/src/php/fetch-state.php/?language=${articlesState.lang}&perpage=${articlesState.articlesPerPage}`).then((res) => {
             console.log(res.data);
             let filteredRes;
             filteredRes = (res.data);
+
 
             articlesDispatch({type: GET_ARTICLES, payload: filteredRes});
             articlesDispatch({type: IS_LOADING, payload: false});
             articlesDispatch({type: ADD_PASS, payload: props.pass});
             articlesDispatch({type: TOGGLE_UPDATE, payload: false});
+            // console.log(` ${filteredRes}`);
         });
-    }, []);
+    }, [articlesState.lang, articlesState.articlesPerPage]);
 
     // const indexOfLastArticle = articlesState.currentPage * articlesState.articlesPerPage;
     // const indexOfFirstArticle = indexOfLastArticle - articlesState.articlesPerPage;
     const currentArticle = articlesState.articles;
+    // console.log(`CA:${currentArticle}`);
 
 
     return (

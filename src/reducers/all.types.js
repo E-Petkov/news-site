@@ -7,3 +7,4 @@ export const HANDLE_ARTICLE_CLICK = 'HANDLE_ARTICLE_CLICK';
 export const ADD_PASS = 'ADD_PASS';
 export const EDIT_TOPIC = 'EDIT_TOPIC';
 export const TOGGLE_UPDATE = 'TOGGLE_UPDATE';
+export const COUNT_NEWS = 'COUNT_NEWS';

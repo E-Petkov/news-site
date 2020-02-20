@@ -33,10 +33,10 @@ const Pagination = ({articlesNum}) => {
            <div><span> News per page: </span>
             <select value={articlesState.articlesPerPage} onChange={handlePerPageChange} name="perPage" id="perPage"
                     className="perPage">
-                <option value="2">2</option>
-                <option value="5">5</option>
-                <option value="8">8</option>
                 <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
             </select></div>
         </div>
     )

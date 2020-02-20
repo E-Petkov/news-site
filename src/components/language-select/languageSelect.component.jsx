@@ -3,9 +3,9 @@ import React, {useContext} from 'react';
 import './languageSelect.styles.scss';
 
 import {ArticlesContext} from "../../contexts/articles.context";
-import {CHANGE_LANGUAGE, HANDLE_ARTICLE_CLICK, SET_CURRENT_PAGE, TOGGLE_UPDATE} from "../../reducers/all.types";
-import qs from "qs";
-import axios from "axios";
+import {CHANGE_LANGUAGE, HANDLE_ARTICLE_CLICK, SET_CURRENT_PAGE, TOGGLE_UPDATE, COUNT_NEWS} from "../../reducers/all.types";
+// import qs from "qs";
+// import axios from "axios";
 
 const LanguageSelect = () => {
     const [articlesState, dispatch] = useContext(ArticlesContext);
@@ -18,15 +18,16 @@ const LanguageSelect = () => {
             }
         });
         dispatch({type:SET_CURRENT_PAGE, payload:1});
-        e.persist();
-        let postData = qs.stringify({
-            "language": articlesState.lang,
-        });
-        axios.post("http://localhost/news-site/src/php/fetch-state.php", postData).then(response => {
-        }).catch(err => {
-            alert(err);
-            console.log(err);
-        });
+        dispatch({type:COUNT_NEWS, payload:60});
+        // e.persist();
+        // let postData = qs.stringify({
+        //     "language": articlesState.lang,
+        // });
+        // axios.post("http://localhost/news-site/src/php/fetch-state.php", postData).then(response => {
+        // }).catch(err => {
+        //     alert(err);
+        //     console.log(err);
+        // });
 
     };
 
@@ -46,7 +47,6 @@ const LanguageSelect = () => {
                 <option value="en">English</option>
                 <option value="de">Deutsch</option>
                 <option value="bg">Български</option>
-                <option value="any">Any Language</option>
             </select>
         </div>
     )
