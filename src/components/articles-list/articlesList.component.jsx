@@ -12,24 +12,21 @@ const ArticlesList = (props) => {
     useEffect(() => {
         articlesDispatch({type: IS_LOADING, payload: true});
         axios.get('http://localhost/news-site/src/php/fetch-state.php').then((res) => {
+            console.log(res.data);
             let filteredRes;
-            if (articlesState.lang === 'any') {
-                filteredRes = (res.data)
-            } else {
-                filteredRes = (res.data).filter(
-                    (el) => el.language === articlesState.lang
-                );
-            }
+            filteredRes = (res.data);
+
             articlesDispatch({type: GET_ARTICLES, payload: filteredRes});
             articlesDispatch({type: IS_LOADING, payload: false});
             articlesDispatch({type: ADD_PASS, payload: props.pass});
             articlesDispatch({type: TOGGLE_UPDATE, payload: false});
         });
-    }, [articlesState.lang, articlesState.update]);
+    }, []);
 
-    const indexOfLastArticle = articlesState.currentPage * articlesState.articlesPerPage;
-    const indexOfFirstArticle = indexOfLastArticle - articlesState.articlesPerPage;
-    const currentArticle = articlesState.articles.slice(indexOfFirstArticle, indexOfLastArticle);
+    // const indexOfLastArticle = articlesState.currentPage * articlesState.articlesPerPage;
+    // const indexOfFirstArticle = indexOfLastArticle - articlesState.articlesPerPage;
+    const currentArticle = articlesState.articles;
+
 
     return (
         <div className='articles' id='articles'>

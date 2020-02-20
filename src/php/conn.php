@@ -43,3 +43,31 @@ function clean($string)
 {
     return htmlentities($string);
 }
+
+function prepareData($data)
+{
+    $data = escape($data);
+    $data = clean($data);
+    return $data;
+}
+
+/**
+ * @param $items array
+ * @param string $method
+ */
+function mPrepareData($items, $method = 'POST')
+{
+    $data = [];
+    if ($method == 'POST') {
+        foreach ($items as $item) {
+            $data[$item] =  prepareData($_POST[$item]);
+        }
+    }
+
+    if ($method == 'GET') {
+        foreach ($items as $item) {
+            $data[$item] =  prepareData($_GET[$item]);
+        }
+    }
+    return $data;
+}

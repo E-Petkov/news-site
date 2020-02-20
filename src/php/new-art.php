@@ -10,12 +10,11 @@ header('Connection: Keep-Alive');
 
 include('./conn.php');
 
-$topic = clean(
-    $_POST['topic']);
-$topic = escape($topic);
-$description = clean(
-    $_POST['description']);
+$topic = prepareData($_POST['topic']);
+$description = prepareData($_POST['topic']);
 $description = escape($description);
+
+
 $text =$_POST['text'];
 $text = escape($text);
 $refs = clean(
