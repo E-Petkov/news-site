@@ -12,7 +12,18 @@ const ArticlesList = (props) => {
     useEffect(() => {
         articlesDispatch({type: IS_LOADING, payload: true});
         // fetching the data using get
-        axios.get(`http://localhost/news-site/src/php/fetch-state.php/?language=${articlesState.lang}&perpage=${articlesState.articlesPerPage}`).then((res) => {
+        // let currentArticleVar;
+        // articlesState.currentArticle ? currentArticleVar = articlesState.currentArticle : currentArticleVar = 1;
+
+
+        const indexOfLastArticle = articlesState.currentPage * articlesState.articlesPerPage;
+        const indexOfFirstArticle = indexOfLastArticle - articlesState.articlesPerPage;
+        console.log(indexOfFirstArticle);
+
+
+
+
+        axios.get(`http://localhost/news-site/src/php/fetch-state.php/?language=${articlesState.lang}&perpage=${articlesState.articlesPerPage}&current=${indexOfFirstArticle}`).then((res) => {
             console.log(res.data);
             let filteredRes;
             filteredRes = (res.data);
@@ -31,12 +42,13 @@ const ArticlesList = (props) => {
             articlesDispatch({type: COUNT_NEWS, payload: news_count});
         });
 
-    }, [articlesState.lang]);
+    }, [articlesState.lang, articlesState.update, articlesState.currentPage, articlesState.articlesPerPage]);
+
 
     // const indexOfLastArticle = articlesState.currentPage * articlesState.articlesPerPage;
     // const indexOfFirstArticle = indexOfLastArticle - articlesState.articlesPerPage;
-    const currentArticle = articlesState.articles;
-    // console.log(`CA:${currentArticle}`);
+    // const currentArticle = articlesState.articles.slice(indexOfFirstArticle, indexOfLastArticle);
+
 
 
     return (
@@ -44,7 +56,7 @@ const ArticlesList = (props) => {
             {!(articlesState.articleView.hidden) ?
                 <FullArticle id={articlesState.articleView.viewedArticleId} articles={articlesState.articles}/> : null}
             {
-                currentArticle.map(({id, topic, description, date}, index) => (
+                articlesState.articles.map(({id, topic, description, date}, index) => (
                     (articlesState.articleView.hidden) ?
                         <Articles
                             key={index}
@@ -57,7 +69,7 @@ const ArticlesList = (props) => {
                 )
             }
             {(articlesState.articleView.hidden) ?
-                <Pagination articlesNum={articlesState.articles.length}/> : null}
+                <Pagination articlesNum={articlesState.news_count}/> : null}
         </div>
     );
 };

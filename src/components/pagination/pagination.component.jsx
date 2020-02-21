@@ -4,16 +4,30 @@ import "./pagination.styles.scss";
 import {ArticlesContext} from "../../contexts/articles.context";
 
 const Pagination = ({articlesNum}) => {
-    const [articlesState, dispatch] = useContext(ArticlesContext);
+    const [articlesState, articlesDispatch] = useContext(ArticlesContext);
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(articlesNum / articlesState.articlesPerPage); i++) {
-        pageNumbers.push(i);
+    let curPag = (articlesState.currentPage);
+    let maxPag = Math.ceil(articlesNum / articlesState.articlesPerPage);
+    if (curPag<=5) {
+        for (let i = 1; i <= maxPag && i<=10 ; i++) {
+            pageNumbers.push(i);
+        }
+    } else if (curPag>=maxPag-5) {
+        for (let i = maxPag-9; i <= maxPag ; i++) {
+            pageNumbers.push(i);
+        }
     }
+    else {
+        for (let i=curPag-4; i<=curPag+5 ;i++ ) {
+            pageNumbers.push(i);
+        }
+    }
+
     const paginate = (pageNumber) => {
-        dispatch({type: SET_CURRENT_PAGE, payload: pageNumber});
+        articlesDispatch({type: SET_CURRENT_PAGE, payload: pageNumber});
     };
     const handlePerPageChange = (e) => {
-        dispatch({type: SET_ARTICLES_PER_PAGE, payload: e.target.value});
+        articlesDispatch({type: SET_ARTICLES_PER_PAGE, payload: e.target.value});
         paginate(1);
     };
 

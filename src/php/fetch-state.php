@@ -8,7 +8,7 @@ header('Keep-Alive: timeout=2, max=100');
 header('Connection: Keep-Alive');
 include './conn.php';
 $language = isset($_GET['language']) ? $_GET['language'] : 'en';
-
+$current = isset($_GET['current']) ? $_GET['current'] : 1;
 $perpage = isset($_GET['perpage']) ? $_GET['perpage'] : 10;
 $sql = "SELECT 
     *
@@ -17,7 +17,7 @@ FROM
 WHERE
     `language` = '{$language}'
 ORDER BY `id` DESC
-LIMIT 0 ,${perpage}";
+LIMIT ${current}, ${perpage}";
 $res = query($sql);
 confirm($res);
 
